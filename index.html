@@ -1,12 +1,306 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Assignment Submissions</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AssignmentSubmissions — Submit • Track • Manage</title>
+  <meta name="description" content="AssignmentSubmissions — a clean interface for uploading and managing assignment submissions for students and educators." />
+  <meta name="theme-color" content="#0f1724" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AssignmentSubmissions" />
+  <meta property="og:description" content="Upload, version and track assignment submissions with a simple workflow." />
+  <meta property="og:url" content="https://assignmentsubmissions.com" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    /* ====== Variables & reset ====== */
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --muted:#6b7280; --text:#0f1724; --accent:#0466c8;
+      --glass: rgba(15,23,36,0.03); --radius:14px; --max-w:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    :root[data-theme="dark"]{
+      --bg:#071026; --card:#071428; --muted:#9aa6b2; --text:#e6eef6; --accent:#1fb6ff;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 80%, black 5%));
+      color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5; padding:28px 18px;
+    }
+    .container{max-width:var(--max-w); margin:0 auto; display:flex;flex-direction:column;gap:22px}
+
+    /* ====== Header ====== */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);
+      display:inline-flex;align-items:center;justify-content:center;color:var(--card);font-weight:700;font-size:18px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.25);
+    }
+    .site-title{font-weight:700;font-size:18px}
+    .site-sub{font-size:13px;color:var(--muted)}
+
+    nav{display:flex;gap:12px;align-items:center}
+    a.btn-link{font-size:14px;color:var(--muted);text-decoration:none;padding:8px;border-radius:10px}
+    a.btn-link:hover{color:var(--text);background:var(--glass)}
+
+    /* ====== Hero ====== */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:start}
+    @media (max-width:920px){ .hero{grid-template-columns:1fr} nav{display:none} }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius); padding:22px; box-shadow:0 8px 30px rgba(2,6,23,0.12);
+      background-color:var(--card);
+      border:1px solid rgba(0,0,0,0.04);
+    }
+    h1{margin:0;font-size:26px}
+    .lead{margin:12px 0 18px;color:var(--muted);font-size:15px}
+
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(90deg,var(--accent), #7c3aed); color:white;border:none;padding:10px 14px;border-radius:10px;
+      font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+    }
+    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06); color:var(--text); font-weight:600}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    @media (max-width:920px){ .features{grid-template-columns:1fr} }
+    .feature{padding:12px;border-radius:10px;background:var(--glass);font-size:14px}
+    .feature h3{margin:0 0 8px;font-size:15px}
+
+    /* ====== Right column preview ====== */
+    .meta{display:flex;flex-direction:column;gap:12px}
+    .tile{border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border:1px solid rgba(0,0,0,0.04)}
+    .tile h4{margin:0 0 6px}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* ====== Contact form ====== */
+    form.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    form.row .full{grid-column:1/-1}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input,textarea,select{
+      width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text);
+      font-size:14px;
+    }
+    textarea{min-height:120px;resize:vertical}
+    .form-foot{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:8px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* ====== Footer ====== */
+    footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 6px}
+    .legal a{color:var(--muted);text-decoration:none;margin-left:12px}
+    .theme-toggle{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px;border-radius:10px;cursor:pointer}
+
+    /* Accessibility focus */
+    :focus{outline:3px solid color-mix(in srgb,var(--accent) 20%, white 80%);outline-offset:3px}
+  </style>
 </head>
 <body>
-    <h1>Welcome to Assignment Submissions</h1>
-    <p>Contact: help@assignmentsubmissions.com</p>
+  <div class="container" id="page">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">AS</div>
+        <div>
+          <div class="site-title">AssignmentSubmissions</div>
+          <div class="site-sub">Submit • Track • Manage</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation">
+        <a class="btn-link" href="#how">How it works</a>
+        <a class="btn-link" href="#features">Features</a>
+        <a class="btn-link" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero" role="main">
+      <!-- Left column -->
+      <section class="card" aria-labelledby="headline">
+        <h1 id="headline">A streamlined workflow for assignment submissions</h1>
+        <p class="lead">Upload files (PDF, DOCX, ZIP), keep versions, and share submission receipts with students and instructors. The site below is served as static pages — contact help@assignmentsubmissions.com for account integration or admin access.</p>
+
+        <div class="actions" role="group" aria-label="Primary actions">
+          <a class="btn" href="#contact">Contact Support</a>
+          <button class="btn ghost" id="download-btn" type="button">Download templates</button>
+        </div>
+
+        <div class="features" id="features" aria-hidden="false">
+          <div class="feature">
+            <h3>File support</h3>
+            <div class="muted">Accepts PDF, DOCX, PPTX and ZIP packages for projects and labs.</div>
+          </div>
+
+          <div class="feature">
+            <h3>Version control</h3>
+            <div class="muted">Multiple uploads per assignment — restore previous submissions when needed.</div>
+          </div>
+
+          <div class="feature">
+            <h3>Receipt & audit</h3>
+            <div class="muted">Each upload generates a timestamped submission receipt for record-keeping.</div>
+          </div>
+        </div>
+
+        <section id="how" style="margin-top:18px">
+          <h3 style="margin:0 0 10px 0">How it works</h3>
+          <ol class="muted" style="padding-left:18px;margin:0 0 8px 0">
+            <li>Student uploads assignment file and enters course & assignment name.</li>
+            <li>System stores file, creates a submission receipt and allows optional overwrite to create new version.</li>
+            <li>Instructor can download submissions or leave feedback (requires server-side features).</li>
+          </ol>
+          <div class="small muted">This static site is intended as a landing/front-end. For full functionality (PHP/DB), server hosting is required.</div>
+        </section>
+      </section>
+
+      <!-- Right column -->
+      <aside class="meta" aria-label="Site preview and quick actions">
+        <div class="tile card">
+          <h4>Quick actions</h4>
+          <div class="muted">Contact support at <strong>help@assignmentsubmissions.com</strong> or use the form below to prefill an email.</div>
+        </div>
+
+        <div class="tile card">
+          <h4>Recent activity (demo)</h4>
+          <div class="muted">Alice — Project1.pdf • 2025‑08‑09</div>
+          <div class="muted">Bob — Lab2.zip • 2025‑08‑07</div>
+        </div>
+
+        <div class="tile card" style="display:flex;flex-direction:column;gap:8px">
+          <h4>Resources</h4>
+          <a class="btn ghost" href="/templates/assignment-template.docx" onclick="return false;" id="template-link">Download assignment template</a>
+          <a class="btn ghost" href="/guides/submission-guidelines.pdf" onclick="return false;" id="guidelines-link">Submission guidelines</a>
+          <div class="small muted">If you want these files hosted, tell me and I will add example files to the repo.</div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Contact section -->
+    <section class="card" id="contact" aria-labelledby="contact-heading">
+      <h3 id="contact-heading">Contact support</h3>
+      <p class="muted">Use this form to open an email prefilled to help@assignmentsubmissions.com. All fields are optional but including course & assignment makes support faster.</p>
+
+      <form id="contactForm" onsubmit="handleMailto(event)" novalidate>
+        <div class="row">
+          <div>
+            <label for="name">Your full name</label>
+            <input id="name" name="name" type="text" placeholder="e.g., Priya Sharma" />
+          </div>
+
+          <div>
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" placeholder="your.email@example.com" />
+          </div>
+
+          <div class="full">
+            <label for="course">Course / Class (optional)</label>
+            <input id="course" name="course" type="text" placeholder="e.g., CS101 — Data Structures" />
+          </div>
+
+          <div class="full">
+            <label for="assignment">Assignment name / ID (optional)</label>
+            <input id="assignment" name="assignment" type="text" placeholder="e.g., Assignment 3 — Linked Lists" />
+          </div>
+
+          <div class="full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Describe the issue or request (short and specific)"></textarea>
+          </div>
+        </div>
+
+        <div class="form-foot">
+          <div class="small muted">By sending you open your email client with a prefilled message to <strong>help@assignmentsubmissions.com</strong>.</div>
+          <div style="display:flex;gap:10px">
+            <button type="submit" class="btn">Open email</button>
+            <button id="clearBtn" type="button" class="btn ghost">Clear</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <footer>
+      <div class="legal small muted">© <span id="year"></span> AssignmentSubmissions</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle light / dark">Toggle theme</button>
+        <div class="small muted">Hosted on GitHub Pages</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ====== Theme handling (prefers-color-scheme + manual toggle saved to localStorage) ======
+    (function(){
+      const root = document.documentElement;
+      const stored = localStorage.getItem('as_theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = stored || (prefersDark ? 'dark' : 'light');
+      root.setAttribute('data-theme', initial === 'dark' ? 'dark' : 'light');
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('as_theme', next);
+        document.getElementById('themeToggle').setAttribute('aria-pressed', next === 'dark');
+      });
+    })();
+
+    // ====== Mailto form builder ======
+    function escapeForMail(s){
+      return encodeURIComponent(s || '').replace(/%20/g, '+');
+    }
+
+    function handleMailto(e){
+      e.preventDefault();
+      const to = 'help@assignmentsubmissions.com';
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const course = document.getElementById('course').value.trim();
+      const assignment = document.getElementById('assignment').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      let subjectParts = [];
+      if(course) subjectParts.push(course);
+      if(assignment) subjectParts.push(assignment);
+      subjectParts.push('Support request');
+      const subject = subjectParts.join(' — ');
+
+      let body = '';
+      if(name) body += `Name: ${name}\n`;
+      if(email) body += `Email: ${email}\n`;
+      if(course) body += `Course: ${course}\n`;
+      if(assignment) body += `Assignment: ${assignment}\n`;
+      if(message) body += `\nMessage:\n${message}\n`;
+
+      body += `\n---\nSent from assignmentsubmissions.com`;
+
+      const mailto = `mailto:${to}?subject=${escapeForMail(subject)}&body=${escapeForMail(body)}`;
+      // Open user's default mail client
+      window.location.href = mailto;
+    }
+
+    // Clear form
+    document.getElementById('clearBtn').addEventListener('click', ()=> {
+      document.getElementById('contactForm').reset();
+    });
+
+    // Small UX: Download buttons (link placeholders)
+    document.getElementById('download-btn').addEventListener('click', ()=> {
+      // If you want real files, add them to /assets or /templates in the repo and update the hrefs below
+      alert('Download files are not present. If you want me to add sample templates and guidelines to the repo, say "Add templates".');
+    });
+    document.getElementById('template-link').addEventListener('click', (e)=> {
+      e.preventDefault(); alert('Template file is not yet uploaded. I can add a sample template to your repo if you want.');
+    });
+    document.getElementById('guidelines-link').addEventListener('click', (e)=> {
+      e.preventDefault(); alert('Guidelines PDF not uploaded. Ask me to add example files to the repo.');
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
