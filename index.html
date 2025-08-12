@@ -35,8 +35,22 @@
     .container{max-width:var(--max-w); margin:0 auto; display:flex;flex-direction:column;gap:22px}
 
     /* ====== Header ====== */
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 12px 18px;
+      background: var(--glass);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(2,6,23,0.1);
+      margin-bottom: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
     .logo{
       width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);
       display:inline-flex;align-items:center;justify-content:center;color:var(--card);font-weight:700;font-size:18px;
@@ -45,7 +59,11 @@
     .site-title{font-weight:700;font-size:18px}
     .site-sub{font-size:13px;color:var(--muted)}
 
-    nav{display:flex;gap:12px;align-items:center}
+    nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
     a.btn-link{font-size:14px;color:var(--muted);text-decoration:none;padding:8px;border-radius:10px}
     a.btn-link:hover{color:var(--text);background:var(--glass)}
 
@@ -98,13 +116,47 @@
 
     /* Accessibility focus */
     :focus{outline:3px solid color-mix(in srgb,var(--accent) 20%, white 80%);outline-offset:3px}
+
+    /* ====== Testimonials section ====== */
+    #testimonials p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    #testimonials strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    #testimonials small {
+      color: var(--muted);
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
   <div class="container" id="page">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true">AS</div>
+        <div class="logo" aria-hidden="true" style="display:flex; align-items:center; justify-content:center;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="grad1" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0466c8"/>
+                <stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+              <clipPath id="clip0">
+                <rect width="52" height="52" rx="12" fill="white"/>
+              </clipPath>
+            </defs>
+            <rect width="52" height="52" rx="12" fill="url(#grad1)"/>
+            <g clip-path="url(#clip0)" fill="white" stroke="white" stroke-width="2">
+              <path d="M18 14 H34 L34 38 H18 Z" fill="none" />
+              <path d="M26 14 L34 22" stroke="white" stroke-width="2" />
+            </g>
+          </svg>
+        </div>
         <div>
           <div class="site-title">AssignmentSubmissions</div>
           <div class="site-sub">Submit • Track • Manage</div>
@@ -146,8 +198,47 @@
           </div>
         </div>
 
+        <section id="testimonials" style="margin: 40px 0; background: var(--glass); border-radius: var(--radius); padding: 24px;">
+          <h3 style="text-align:center; margin-bottom: 24px;">What our users say</h3>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;">
+            <div style="background: var(--card); border-radius: 14px; box-shadow: 0 8px 20px rgba(2,6,23,0.1); max-width: 300px; padding: 20px; flex: 1 1 280px;">
+              <p style="font-style: italic; margin-bottom: 16px;">“This platform made submitting assignments so easy and hassle-free! Version control is a game-changer.”</p>
+              <div style="display:flex; align-items:center; gap: 12px;">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User 1" style="width:40px; height:40px; border-radius:50%; object-fit: cover;" />
+                <div>
+                  <strong>Emily R.</strong><br />
+                  <small>Computer Science Student</small>
+                </div>
+              </div>
+            </div>
+            <div style="background: var(--card); border-radius: 14px; box-shadow: 0 8px 20px rgba(2,6,23,0.1); max-width: 300px; padding: 20px; flex: 1 1 280px;">
+              <p style="font-style: italic; margin-bottom: 16px;">“The receipt and audit feature helps us track submissions easily and communicate better with students.”</p>
+              <div style="display:flex; align-items:center; gap: 12px;">
+                <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User 2" style="width:40px; height:40px; border-radius:50%; object-fit: cover;" />
+                <div>
+                  <strong>David L.</strong><br />
+                  <small>Professor of Mathematics</small>
+                </div>
+              </div>
+            </div>
+            <div style="background: var(--card); border-radius: 14px; box-shadow: 0 8px 20px rgba(2,6,23,0.1); max-width: 300px; padding: 20px; flex: 1 1 280px;">
+              <p style="font-style: italic; margin-bottom: 16px;">“I appreciate how clean and user-friendly the interface is. It’s made submission deadlines stress-free.”</p>
+              <div style="display:flex; align-items:center; gap: 12px;">
+                <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User 3" style="width:40px; height:40px; border-radius:50%; object-fit: cover;" />
+                <div>
+                  <strong>Sophia M.</strong><br />
+                  <small>Graduate Student</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="how" style="margin-top:18px">
           <h3 style="margin:0 0 10px 0">How it works</h3>
+          <p class="muted" style="margin-top:0; margin-bottom:10px;">
+            This system simplifies submitting and managing assignments by allowing students to upload files and track versions easily. Instructors can access submissions and provide feedback, streamlining communication and record-keeping.
+          </p>
           <ol class="muted" style="padding-left:18px;margin:0 0 8px 0">
             <li>Student uploads assignment file and enters course & assignment name.</li>
             <li>System stores file, creates a submission receipt and allows optional overwrite to create new version.</li>
@@ -159,22 +250,31 @@
 
       <!-- Right column -->
       <aside class="meta" aria-label="Site preview and quick actions">
-        <div class="tile card">
-          <h4>Quick actions</h4>
-          <div class="muted">Contact support at <strong>help@assignmentsubmissions.com</strong> or use the form below to prefill an email.</div>
-        </div>
+        <div style="display:flex; flex-direction: column; gap: 24px; align-items: center; padding: 12px;">
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80"
+            alt="Student workspace"
+            style="width: 100%; max-width: 320px; border-radius: 16px; box-shadow: 0 12px 28px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;"
+            onmouseover="this.style.transform='scale(1.03)'"
+            onmouseout="this.style.transform='scale(1)'"
+          />
 
-        <div class="tile card">
-          <h4>Recent activity (demo)</h4>
-          <div class="muted">Alice — Project1.pdf • 2025‑08‑09</div>
-          <div class="muted">Bob — Lab2.zip • 2025‑08‑07</div>
-        </div>
+          <div class="tile card" style="width: 100%; max-width: 320px; text-align: center;">
+            <h4>Quick actions</h4>
+            <div class="muted">Contact support at <strong>help@assignmentsubmissions.com</strong> or use the form below to prefill an email.</div>
+          </div>
 
-        <div class="tile card" style="display:flex;flex-direction:column;gap:8px">
-          <h4>Resources</h4>
-          <a class="btn ghost" href="/templates/assignment-template.docx" onclick="return false;" id="template-link">Download assignment template</a>
-          <a class="btn ghost" href="/guides/submission-guidelines.pdf" onclick="return false;" id="guidelines-link">Submission guidelines</a>
-          <div class="small muted">If you want these files hosted, tell me and I will add example files to the repo.</div>
+          <div class="tile card" style="width: 100%; max-width: 320px; text-align: center;">
+            <h4>Recent activity (demo)</h4>
+            <div class="muted">Alice — Project1.pdf • 2025‑08‑09</div>
+            <div class="muted">Bob — Lab2.zip • 2025‑08‑07</div>
+          </div>
+
+          <div
+            style="width: 100%; max-width: 320px; font-style: italic; color: var(--muted); font-size: 14px; text-align: center; padding: 16px; border-radius: var(--radius); background: var(--glass);"
+          >
+            “Effortlessly manage your assignments with clarity and confidence.”
+          </div>
         </div>
       </aside>
     </main>
@@ -188,7 +288,7 @@
         <div class="row">
           <div>
             <label for="name">Your full name</label>
-            <input id="name" name="name" type="text" placeholder="e.g., Priya Sharma" />
+            <input id="name" name="name" type="text" placeholder="e.g., Kailash Yadav" />
           </div>
 
           <div>
@@ -248,38 +348,52 @@
       });
     })();
 
-    // ====== Mailto form builder ======
-    function escapeForMail(s){
-      return encodeURIComponent(s || '').replace(/%20/g, '+');
+    // ====== EmailJS sendEmail function (no encoding issues, plain text) ======
+    function sendEmail(e){
+      e.preventDefault();
+
+      const templateParams = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        course: document.getElementById('course').value.trim(),
+        assignment: document.getElementById('assignment').value.trim(),
+        message: document.getElementById('message').value.trim()
+      };
+
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(function(response) {
+          alert('Message sent successfully!');
+          document.getElementById('contactForm').reset();
+        }, function(error) {
+          alert('Failed to send message: ' + JSON.stringify(error));
+        });
     }
 
-    function handleMailto(e){
-      e.preventDefault();
-      const to = 'help@assignmentsubmissions.com';
+    // ====== handleMailto function ======
+    function handleMailto(event) {
+      event.preventDefault();
+
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const course = document.getElementById('course').value.trim();
       const assignment = document.getElementById('assignment').value.trim();
       const message = document.getElementById('message').value.trim();
 
-      let subjectParts = [];
-      if(course) subjectParts.push(course);
-      if(assignment) subjectParts.push(assignment);
-      subjectParts.push('Support request');
-      const subject = subjectParts.join(' — ');
+      const to = 'help@assignmentsubmissions.com';
+      let subject = 'Assignment Submission Support Request';
+      if (course) subject += ` - Course: ${course}`;
+      if (assignment) subject += ` - Assignment: ${assignment}`;
 
       let body = '';
-      if(name) body += `Name: ${name}\n`;
-      if(email) body += `Email: ${email}\n`;
-      if(course) body += `Course: ${course}\n`;
-      if(assignment) body += `Assignment: ${assignment}\n`;
-      if(message) body += `\nMessage:\n${message}\n`;
+      if (name) body += `Name: ${name}\n`;
+      if (email) body += `Email: ${email}\n`;
+      if (course) body += `Course: ${course}\n`;
+      if (assignment) body += `Assignment: ${assignment}\n`;
+      if (message) body += `Message:\n${message}\n`;
 
-      body += `\n---\nSent from assignmentsubmissions.com`;
+      const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      const mailto = `mailto:${to}?subject=${escapeForMail(subject)}&body=${escapeForMail(body)}`;
-      // Open user's default mail client
-      window.location.href = mailto;
+      window.location.href = mailtoLink;
     }
 
     // Clear form
@@ -301,6 +415,15 @@
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for "How it works" link
+    document.querySelector('a[href="#how"]').addEventListener('click', function(e) {
+      e.preventDefault();
+      const section = document.getElementById('how');
+      if(section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   </script>
 </body>
 </html>
