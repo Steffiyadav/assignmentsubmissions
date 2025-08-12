@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AssignmentSubmissions — Submit • Track • Manage</title>
   <meta name="description" content="AssignmentSubmissions — a clean interface for uploading and managing assignment submissions for students and educators.">
   <meta name="theme-color" content="#0f1724">
@@ -55,8 +55,20 @@
     nav { display: flex; gap: 18px; align-items: center; }
     a.btn-link { font-size: 14px; color: var(--muted); text-decoration: none; padding: 8px; border-radius: 10px; }
     a.btn-link:hover { color: var(--text); background: var(--glass); }
-    .hero { display: grid; grid-template-columns: 1fr 420px; gap: 22px; align-items: start; }
-    @media (max-width:920px) { .hero { grid-template-columns: 1fr; } nav { display: none; } }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        display: none;
+      }
+    }
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border-radius: var(--radius); padding: 22px; box-shadow: 0 8px 30px rgba(2,6,23,0.12);
@@ -102,6 +114,30 @@
     #testimonials > div::-webkit-scrollbar-thumb {
       background-color: rgba(15,23,36,0.2);
       border-radius: 3px;
+    }
+    .meta img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    @media (max-width: 420px) {
+      .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      .lead {
+        font-size: 14px;
+      }
+      .site-title {
+        font-size: 16px;
+      }
+      .site-sub {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
